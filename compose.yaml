@@ -1,0 +1,8 @@
+services:
+  ci:
+    build:
+      context: .
+      dockerfile: ./container/ci/Dockerfile
+    volumes:
+      - .:/workspace
+    tty: true
