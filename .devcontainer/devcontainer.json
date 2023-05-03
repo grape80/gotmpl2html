@@ -1,6 +1,6 @@
 {
-    "dockerComposeFile": "../compose.yaml",
-    "service": "ci",
+	"dockerComposeFile": "../compose.yaml",
+	"service": "ci",
 	"workspaceFolder": "/workspace",
 
 	"customizations": {
