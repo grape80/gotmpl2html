@@ -1,5 +1,6 @@
-.SUFFIXES:
+MAKEFLAGS += --no-builtin-rules
 
 .PHONY: test
 test:
-	ls -la
+	docker compose up -d ci
+	docker compose ps
