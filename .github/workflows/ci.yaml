@@ -4,4 +4,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: make -d dc.up
+      - run: make -d dc.up-ci
