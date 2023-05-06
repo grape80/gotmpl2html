@@ -1,4 +1,3 @@
-MAKEFLAGS += --no-builtin-rules
 .SUFFIXES:
 
 .PHONY: test
