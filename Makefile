@@ -2,9 +2,11 @@ MAKEFLAGS += --no-builtin-rules
 
 .PHONY: gobuild
 gobuild:
-	go version
+	echo 'go build'
 
-.PHONY: dc.up%
-dc.up%:
-	docker compose up -d ${@:dc.up-%:%}
-	docker compose ps
+.PHONY: gotest
+gotest:
+	echo 'go test'
+
+.PHONY: ci
+ci: gotest
