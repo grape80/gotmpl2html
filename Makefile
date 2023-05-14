@@ -10,11 +10,7 @@ gobuild:
 
 .PHONY: gotest
 gotest:
-	ls -la
-	cat /etc/passwd
-	cat /etc/group
-	ps aux
-	id `whoami` && mkdir $(logDir)
+	mkdir $(logDir)
 	go test -v -cover -count=1 -coverprofile=$(logDir)/gocover-$(now).out | tee $(logDir)/gotest-$(now).log
 	go tool cover -html=$(logDir)/gocover-$(now).out -o $(logDir)/gocover-$(now).html
 
