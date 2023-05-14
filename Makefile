@@ -10,6 +10,7 @@ gobuild:
 
 .PHONY: gotest
 gotest:
+	ls -la
 	mkdir -p ./$(logDir)
 	go test -v -cover -count=1 -coverprofile=$(logDir)/gocover-$(now).out | tee $(logDir)/gotest-$(now).log
 	go tool cover -html=$(logDir)/gocover-$(now).out -o $(logDir)/gocover-$(now).html
