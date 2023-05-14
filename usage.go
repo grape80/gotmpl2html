@@ -1,6 +1,6 @@
 package gotmpl2html
 
-const Usage string = `
+const usage string = `
 Usage:
     gotmpl2html [commands] [options] <argument>
 
