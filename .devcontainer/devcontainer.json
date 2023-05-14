@@ -2,11 +2,22 @@
 	"dockerComposeFile": "../compose.yaml",
 	"service": "ci",
 	"workspaceFolder": "/workspace",
-
 	"customizations": {
 		"vscode": {
+			"settings": {
+				"workbench.startupEditor": "none",
+				"git.enableSmartCommit": true,
+				"editor.renderWhitespace": "all",
+				"editor.formatOnSave": true,
+				"files.autoSave": "afterDelay",
+				"files.associations": {
+					"*.gotmpl": "html",
+					"*.partial": "html"
+				}
+			},
 			"extensions": [
-				"golang.Go"
+				"golang.Go",
+				"redhat.vscode-yaml"
 			]
 		}
 	}
