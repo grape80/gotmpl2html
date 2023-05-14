@@ -1,0 +1,3 @@
+{{define "/testdata/_header.partial"}}
+    <header>Header</header>
+{{end}}

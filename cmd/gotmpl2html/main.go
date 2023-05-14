@@ -1,11 +1,16 @@
 package main
 
 import (
-	"fmt"
+	"os"
 
 	"github.com/grape80/gotmpl2html"
 )
 
+var _version string
+
 func main() {
-	fmt.Print(gotmpl2html.Usage)
+	app := gotmpl2html.New()
+	app.Version = _version
+
+	os.Exit(app.Run())
 }

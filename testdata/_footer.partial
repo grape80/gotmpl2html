@@ -1,0 +1,3 @@
+{{define "/testdata/_footer.partial"}}
+    <footer>Footer</footer>
+{{end}}
