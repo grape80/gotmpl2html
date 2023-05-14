@@ -3,6 +3,6 @@ gotmpl2html is a cli tool to convert gotemplate to html.
 
 ## Usage
 ```sh
-$ gotmpl2html input.tmpl > output.html
+$ gotmpl2html input.gotmpl > output.html
 ```
 For more information, see [usage](usage.go)
