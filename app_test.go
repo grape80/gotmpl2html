@@ -20,6 +20,7 @@ func TestApp_Run(t *testing.T) {
 		"run_multi_gotmpls":      {EXIT_FAILURE, []string{"go1.gotmpl", "go2.gotmpl"}},
 		"run_cannot_open_gotmpl": {EXIT_FAILURE, []string{"cannot_open.gotmpl"}},
 		"run_invalid_gotmpl":     {EXIT_FAILURE, []string{"testdata/invalid.gotmpl"}},
+		"run_exec_error":         {EXIT_FAILURE, []string{"testdata/exec_error.gotmpl"}},
 	}
 
 	for name, test := range tests {
