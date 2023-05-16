@@ -21,6 +21,8 @@ func TestApp_Run(t *testing.T) {
 		"run_cannot_open_gotmpl": {EXIT_FAILURE, []string{"cannot_open.gotmpl"}},
 		"run_invalid_gotmpl":     {EXIT_FAILURE, []string{"testdata/invalid.gotmpl"}},
 		"run_exec_error":         {EXIT_FAILURE, []string{"testdata/exec_error.gotmpl"}},
+
+		"run_no_options":       {EXIT_SUCCESS, []string{"testdata/input.gotmpl"}},
 	}
 
 	for name, test := range tests {
