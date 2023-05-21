@@ -23,7 +23,7 @@ $(binDir)/$(app): $(gofiles)
 .PHONY: gotest ## Run go test.
 gotest:
 	mkdir -p $(logDir)
-	go test -v -coverpkg=./... -count=1 -coverprofile=$(logDir)/gocover-$(now).out | tee $(logDir)/gotest-$(now).log
+	go test -v ./... -coverpkg=./... -count=1 -coverprofile=$(logDir)/gocover-$(now).out | tee $(logDir)/gotest-$(now).log
 	go tool cover -html=$(logDir)/gocover-$(now).out -o $(logDir)/gocover-$(now).html
 
 .PHONY: ci ## Run CI.
