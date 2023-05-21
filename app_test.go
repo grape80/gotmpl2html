@@ -15,14 +15,14 @@ func TestApp_Run(t *testing.T) {
 		"no_args": {EXIT_FAILURE, []string{}},
 
 		// run
-		"run_invalid_option":        {EXIT_FAILURE, []string{"--option=invalid", "testdata/input.gotmpl"}},
+		"run_invalid_option":     {EXIT_FAILURE, []string{"--option=invalid", "testdata/input.gotmpl"}},
 		"run_no_gotmpl":          {EXIT_FAILURE, []string{"--basedir=testdata"}},
 		"run_multi_gotmpls":      {EXIT_FAILURE, []string{"go1.gotmpl", "go2.gotmpl"}},
 		"run_cannot_open_gotmpl": {EXIT_FAILURE, []string{"cannot_open.gotmpl"}},
 		"run_invalid_gotmpl":     {EXIT_FAILURE, []string{"testdata/invalid.gotmpl"}},
 		"run_exec_error":         {EXIT_FAILURE, []string{"testdata/exec_error.gotmpl"}},
 
-		"run_no_options":       {EXIT_SUCCESS, []string{"testdata/input.gotmpl"}},
+		"run_no_options": {EXIT_SUCCESS, []string{"testdata/input.gotmpl"}},
 	}
 
 	for name, test := range tests {
