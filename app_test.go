@@ -22,7 +22,17 @@ func TestApp_Run(t *testing.T) {
 		"run_invalid_gotmpl":     {EXIT_FAILURE, []string{"testdata/invalid.gotmpl"}},
 		"run_exec_error":         {EXIT_FAILURE, []string{"testdata/exec_error.gotmpl"}},
 
-		"run_no_options": {EXIT_SUCCESS, []string{"testdata/input.gotmpl"}},
+		"run_no_options":   {EXIT_SUCCESS, []string{"testdata/input.gotmpl"}},
+		"run_empty_gotmpl": {EXIT_SUCCESS, []string{"testdata/empty.gotmpl"}},
+		"run_with_basedir": {EXIT_SUCCESS, []string{"--basedir=testdata", "testdata/basedir.gotmpl"}},
+
+		// help
+		"help":              {EXIT_SUCCESS, []string{"help"}},
+		"help_useless_args": {EXIT_SUCCESS, []string{"help", "--option=useless", "useless.gotmpl"}},
+
+		// version
+		"version":              {EXIT_SUCCESS, []string{"version"}},
+		"version_useless_args": {EXIT_SUCCESS, []string{"version", "--option=useless", "useless.tmpl"}},
 	}
 
 	for name, test := range tests {
