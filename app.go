@@ -61,7 +61,7 @@ func (a *App) newCommand() (cli.Command, error) {
 	}
 
 	s := strings.Join(a.Args, " ")
-	switch true {
+	switch {
 	case strings.HasPrefix(s, "version"):
 		return &commands.Version{
 			IO:      a.IO,
