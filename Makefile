@@ -29,6 +29,13 @@ gotest:
 .PHONY: ci ## Run CI.
 ci: gotest
 
+.PHONY: cleanbin ## Clean binary.
+cleanbin:
+	rm -rvf $(binDir)
+
 .PHONY: cleanlog ## Clean log.
 cleanlog:
 	rm -rvf $(logDir)
+
+.PHONY: cleanall ## Clean all.
+cleanall: cleanbin cleanlog
