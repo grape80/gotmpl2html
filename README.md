@@ -8,8 +8,7 @@ $ gotmpl2html input.gotmpl > output.html
 For more information, see [usage](usage.go)
 
 ## Feature
-To be implemented
-- [ ] JSON Binding
+- [x] JSON Binding
 
   Example
 
