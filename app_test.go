@@ -21,10 +21,13 @@ func TestApp_Run(t *testing.T) {
 		"run_cannot_open_gotmpl": {EXIT_FAILURE, []string{"cannot_open.gotmpl"}},
 		"run_invalid_gotmpl":     {EXIT_FAILURE, []string{"testdata/invalid.gotmpl"}},
 		"run_exec_error":         {EXIT_FAILURE, []string{"testdata/exec_error.gotmpl"}},
+		"run_invalid_data":       {EXIT_FAILURE, []string{"testdata/invalid_data.gotmpl"}},
+		"run_invalid_data_json":  {EXIT_FAILURE, []string{"testdata/invalid_data_json.gotmpl"}},
 
-		"run_no_options":   {EXIT_SUCCESS, []string{"testdata/input.gotmpl"}},
-		"run_empty_gotmpl": {EXIT_SUCCESS, []string{"testdata/empty.gotmpl"}},
-		"run_with_basedir": {EXIT_SUCCESS, []string{"--basedir=testdata", "testdata/basedir.gotmpl"}},
+		"run_no_options":      {EXIT_SUCCESS, []string{"testdata/input.gotmpl"}},
+		"run_empty_gotmpl":    {EXIT_SUCCESS, []string{"testdata/empty.gotmpl"}},
+		"run_with_basedir":    {EXIT_SUCCESS, []string{"--basedir=testdata", "testdata/basedir.gotmpl"}},
+		"run_input_with_data": {EXIT_SUCCESS, []string{"testdata/data.gotmpl"}},
 
 		// help
 		"help":              {EXIT_SUCCESS, []string{"help"}},

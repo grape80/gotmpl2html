@@ -1,0 +1,4 @@
+{{data "/testdata/_footer_data.partial.json"}}
+{{define "/testdata/_footer_data.partial"}}
+    <footer>{{.footer}}</footer>
+{{end}}

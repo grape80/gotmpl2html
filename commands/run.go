@@ -18,19 +18,18 @@ type Run struct {
 }
 
 func (c *Run) Execute() error {
-	conv := conv.Converter{
-		Basedir: c.basedir,
-		Gotmpl:  c.gotmpl,
-	}
+	conv := conv.NewConverter()
+	conv.Basedir = c.basedir
+	conv.Gotmpl = c.gotmpl
 
 	html, err := conv.Run()
 	if err != nil {
 		return err
 	}
 
-	c.Print(html)
+	_, err = c.Print(html)
 
-	return nil
+	return err
 }
 
 func (c *Run) ParseArgs(args []string) error {

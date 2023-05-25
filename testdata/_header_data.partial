@@ -1,0 +1,4 @@
+{{data "/testdata/_header_data.partial.json"}}
+{{define "/testdata/_header_data.partial"}}
+    <header>{{.header}}</header>
+{{end}}
