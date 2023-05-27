@@ -1,4 +1,11 @@
 FROM golang:1.20.3-bullseye
+
+RUN apt-get update \
+ && apt-get install -y --no-install-recommends \
+    zip \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /workspace
 
 RUN useradd -u 1001 -m nonroot && chown nonroot:nonroot -R /workspace

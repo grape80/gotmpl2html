@@ -2,7 +2,7 @@ services:
   ci:
     build:
       context: .
-      dockerfile: ./.container/ci/Dockerfile
+      dockerfile: ./.container/cicd/Dockerfile
     volumes:
       - .:/workspace
     tty: true
