@@ -5,7 +5,8 @@ app := gotmpl2html
 mainDir := cmd/$(app)
 binDir := bin
 logDir := log
-gobuild_ldflags := '-s -w'
+distDir := dist
+gobuild_opts := $(shell cat .build/gobuild.opts | tr '\n' ' ')
 
 gofiles := $(shell find . -type f -name '*.go' -print)
 now = $(shell date '+%Y%m%d-%H%M%S')
@@ -18,7 +19,10 @@ help:
 gobuild: $(binDir)/$(app)
 
 $(binDir)/$(app): $(gofiles)
-	go build -ldflags $(gobuild_ldflags) -o $@ ./$(mainDir)
+	go build $(gobuild_opts) -o $@ ./$(mainDir)
+
+.PHONY: gobuildx ## Build go binary for multi platform.
+gobuildx:
 
 .PHONY: gotest ## Run go test.
 gotest:
@@ -29,6 +33,9 @@ gotest:
 .PHONY: ci ## Run CI.
 ci: gotest
 
+.PHONY: cd ## Run CD.
+cd: gobuildx
+
 .PHONY: cleanbin ## Clean binary.
 cleanbin:
 	rm -rvf $(binDir)
@@ -37,5 +44,9 @@ cleanbin:
 cleanlog:
 	rm -rvf $(logDir)
 
+.PHONY: cleandist ## Clean dist.
+cleandist:
+	rm -rvf $(distDir)
+
 .PHONY: cleanall ## Clean all.
-cleanall: cleanbin cleanlog
+cleanall: cleanbin cleanlog cleandist
