@@ -1,0 +1,14 @@
+on: [push]
+
+jobs:
+  build:
+    uses: ./.github/workflows/_build.yaml
+
+  test:
+    needs: build
+    uses: ./.github/workflows/_test.yaml
+
+  deploy:
+    needs: test
+    if: startsWith(github.ref, 'refs/tags/')
+    uses: ./.github/workflows/_deploy.yaml

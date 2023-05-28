@@ -1,5 +1,5 @@
 services:
-  ci:
+  cicd:
     build:
       context: .
       dockerfile: ./.container/cicd/Dockerfile

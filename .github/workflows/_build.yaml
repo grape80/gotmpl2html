@@ -1,0 +1,15 @@
+on:
+  workflow_call:
+
+jobs:
+  gobuild:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "gobuild"
+      # - uses: actions/checkout@v3
+      # - run: docker compose up -d cicd && docker compose ps cicd
+      # - run: docker compose exec cicd make gobuild
+      # - uses: actions/upload-artifact@v3
+      #   with:
+      #     name: gobuild_log
+      #     path: log/build/go/

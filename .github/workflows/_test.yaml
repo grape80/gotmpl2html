@@ -1,0 +1,15 @@
+on:
+  workflow_call:
+
+jobs:
+  gotest:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "gotest"
+      # - uses: actions/checkout@v3
+      # - run: docker compose up -d cicd && docker compose ps cicd
+      # - run: docker compose exec cicd make gotest
+      # - uses: actions/upload-artifact@v3
+      #   with:
+      #     name: gotest_log
+      #     path: log/test/go/
