@@ -11,5 +11,5 @@ jobs:
       - run: docker compose exec cicd make gotest
       - uses: actions/upload-artifact@v3
         with:
-          name: gotest_log
+          name: test_gotest_log
           path: log/test/
