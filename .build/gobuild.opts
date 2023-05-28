@@ -1,2 +1,2 @@
--ldflags '-s -w'
+-ldflags "-s -w -X main._version=$VERSION"
 -trimpath
