@@ -1,6 +1,6 @@
 {
 	"dockerComposeFile": "../compose.yaml",
-	"service": "ci",
+	"service": "cicd",
 	"workspaceFolder": "/workspace",
 	"customizations": {
 		"vscode": {
