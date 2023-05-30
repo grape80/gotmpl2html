@@ -9,41 +9,43 @@ on:
 jobs:
   godeploy:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        goos: [linux, darwin, windows]
-        goarch: [amd64, arm64]
     steps:
-      - uses: actions/checkout@v3
-      - run: docker compose up -d cicd && docker compose ps cicd
-      - run: docker compose exec cicd make gox
-
-      # - uses: actions/upload-artifact@v3
-      #   with:
-      #     name: deploy_godeploy_log
-      #     path: log/deploy/
-
-      - id: create_release
-        uses: actions/create-release@v1
+      - uses: actions/create-release@v1
+        id: create_release
         with:
-          tag_name: ${{ github.ref }}
-          release_name: ${{ github.ref }}
+          tag_name: test
+          release_name: test ${{ github.ref }}
           body: Changes in this Release
           draft: true
           prerelease: true
 
-      # - uses: actions/upload-release-asset@v1
-      #   if: ${{ matrix.goos }} == 'windows'
-      #   with:
-      #     upload_url: ${{ steps.create_release.outputs.upload_url }}
-      #     asset_path: dist/${{ github.event.repository.name }}-.${{ matrix.goos }}-${{ matrix.goarch }}.zip
-      #     asset_name: ${{ github.event.repository.name }}-${{ github.ref }}.${{ matrix.goos }}-${{ matrix.goarch }}.zip
-      #     asset_content_type: application/zip
+    # runs-on: ubuntu-latest
+    # strategy:
+    #   matrix:
+    #     goos: [linux, darwin, windows]
+    #     goarch: [amd64, arm64]
+    # steps:
+    #   - uses: actions/checkout@v3
+    #   - run: docker compose up -d cicd && docker compose ps cicd
+    #   - run: docker compose exec cicd make gox
 
-      # - uses: actions/upload-release-asset@v1
-      #   if: ${{ matrix.goos }} != 'windows'
-      #   with:
-      #     upload_url: ${{ steps.create_release.outputs.upload_url }}
-      #     asset_path: dist/${{ github.event.repository.name }}-.${{ matrix.goos }}-${{ matrix.goarch }}.tar.gz
-      #     asset_name: ${{ github.event.repository.name }}-.${{ matrix.goos }}-${{ matrix.goarch }}.tar.gz
-      #     asset_content_type: application/gzip
+    # - uses: actions/upload-artifact@v3
+    #   with:
+    #     name: deploy_godeploy_log
+    #     path: log/deploy/
+
+    # - uses: actions/upload-release-asset@v1
+    #   if: ${{ matrix.goos }} == 'windows'
+    #   with:
+    #     upload_url: ${{ steps.create_release.outputs.upload_url }}
+    #     asset_path: dist/${{ github.event.repository.name }}-.${{ matrix.goos }}-${{ matrix.goarch }}.zip
+    #     asset_name: ${{ github.event.repository.name }}-${{ github.ref }}.${{ matrix.goos }}-${{ matrix.goarch }}.zip
+    #     asset_content_type: application/zip
+
+    # - uses: actions/upload-release-asset@v1
+    #   if: ${{ matrix.goos }} != 'windows'
+    #   with:
+    #     upload_url: ${{ steps.create_release.outputs.upload_url }}
+    #     asset_path: dist/${{ github.event.repository.name }}-.${{ matrix.goos }}-${{ matrix.goarch }}.tar.gz
+    #     asset_name: ${{ github.event.repository.name }}-.${{ matrix.goos }}-${{ matrix.goarch }}.tar.gz
+    #     asset_content_type: application/gzip
