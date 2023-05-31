@@ -23,5 +23,6 @@ jobs:
       - uses: softprops/action-gh-release@v1
         with:
           files: dist/${{ github.event.repository.name }}-${{ inputs.tag }}*
+          name: ${{ inputs.tag }}
           draft: true
           prerelease: true
