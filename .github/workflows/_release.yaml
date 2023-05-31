@@ -1,0 +1,57 @@
+on:
+  workflow_call:
+    inputs:
+      tag:
+        description: "Enter the tag name"
+        required: true
+        type: string
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Enter the tag name"
+        required: true
+        type: string
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "TAG_NAME=${{ inputs.tag }}" >> $GITHUB_ENV
+
+      - uses: actions/create-release@v1
+        id: create_release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ env.TAG_NAME }}
+          release_name: ${{ env.TAG_NAME }}
+          draft: true
+          prerelease: true
+
+  gox:
+    needs: setup
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        os: [linux, darwin]
+        arch: [amd64, arm64]
+    steps:
+      - uses: actions/checkout@v3
+      - run: docker compose up -d cicd && docker compose ps cicd
+      - run: docker compose exec cicd make gox GH_OS_ARCH=${{ matrix.os }}/${{ matrix.arch }}
+
+      # - uses: actions/upload-release-asset@v1
+      #   if: ${{ matrix.os }} == 'windows'
+      #   with:
+      #     upload_url: ${{ steps.create_release.outputs.upload_url }}
+      #     asset_path: dist/${{ github.event.repository.name }}-.${{ matrix.os }}-${{ matrix.arch }}.zip
+      #     asset_name: ${{ github.event.repository.name }}-${{ github.ref }}.${{ matrix.os }}-${{ matrix.arch }}.zip
+      #     asset_content_type: application/zip
+
+      - uses: actions/upload-release-asset@v1
+        if: matrix.os != 'windows'
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: dist/${{ github.event.repository.name }}-.${{ matrix.os }}-${{ matrix.arch }}.tar.gz
+          asset_name: ${{ github.event.repository.name }}-.${{ matrix.os }}-${{ matrix.arch }}.tar.gz
+          asset_content_type: application/gzip
