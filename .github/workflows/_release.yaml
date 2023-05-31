@@ -15,6 +15,8 @@ on:
 jobs:
   setup:
     runs-on: ubuntu-latest
+    outputs:
+      upload_url: ${{ steps.create_release.outputs.upload_url }}
     steps:
       - run: echo "TAG_NAME=${{ inputs.tag }}" >> $GITHUB_ENV
 
@@ -51,7 +53,7 @@ jobs:
       - uses: actions/upload-release-asset@v1
         if: matrix.os != 'windows'
         with:
-          upload_url: ${{ jobs.setup.create_release.outputs.upload_url }}
+          upload_url: ${{ needs.setup.outputs.upload_url }}
           asset_path: dist/${{ github.event.repository.name }}-.${{ matrix.os }}-${{ matrix.arch }}.tar.gz
           asset_name: ${{ github.event.repository.name }}-.${{ matrix.os }}-${{ matrix.arch }}.tar.gz
           asset_content_type: application/gzip
