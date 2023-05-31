@@ -6,14 +6,9 @@ app=$APP_NAME
 version=$VERSION
 mainDir=$MAIN_DIR
 distDir=$DIST_DIR
-distlist=.build/godist.list # for local
 
+distlist=.build/godist.list
 gobuild_opts=$(cat .build/gobuild.opts | tr '\n' ' ')
-
-if [ $GH_OS_ARCH != "" ]; then
-    # for github actions
-    distlist=$GH_OS_ARCH
-fi
 
 for target in $(cat $distlist | grep -v '#')
 do

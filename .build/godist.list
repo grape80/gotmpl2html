@@ -43,6 +43,6 @@ linux/arm64
 #plan9/arm
 #solaris/amd64
 #windows/386
-windows/amd64
+#windows/amd64
 #windows/arm
-windows/arm64
+#windows/arm64

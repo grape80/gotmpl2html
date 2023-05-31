@@ -13,48 +13,15 @@ on:
         type: string
 
 jobs:
-  setup:
-    runs-on: ubuntu-latest
-    outputs:
-      upload_url: ${{ steps.create_release.outputs.upload_url }}
-      tag_name: ${{ env.tag_name }}
-    steps:
-      - run: echo "tag_name=${{ inputs.tag }}" >> $GITHUB_ENV
-
-      - uses: actions/create-release@v1
-        id: create_release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ env.tag_name }}
-          release_name: ${{ env.tag_name }}
-          draft: true
-          prerelease: true
-
   gox:
-    needs: setup
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        os: [linux, darwin]
-        arch: [amd64, arm64]
     steps:
       - uses: actions/checkout@v3
       - run: docker compose up -d cicd && docker compose ps cicd
-      - run: docker compose exec cicd make gox GH_OS_ARCH=${{ matrix.os }}/${{ matrix.arch }}
+      - run: docker compose exec cicd make gox VERSION=${{ inputs.tag }}
 
-      # - uses: actions/upload-release-asset@v1
-      #   if: ${{ matrix.os }} == 'windows'
-      #   with:
-      #     upload_url: ${{ steps.create_release.outputs.upload_url }}
-      #     asset_path: dist/${{ github.event.repository.name }}-.${{ matrix.os }}-${{ matrix.arch }}.zip
-      #     asset_name: ${{ github.event.repository.name }}-${{ github.ref }}.${{ matrix.os }}-${{ matrix.arch }}.zip
-      #     asset_content_type: application/zip
-
-      - uses: actions/upload-release-asset@v1
-        if: matrix.os != 'windows'
+      - uses: softprops/action-gh-release@v1
         with:
-          upload_url: ${{ needs.setup.outputs.upload_url }}
-          asset_path: dist/${{ github.event.repository.name }}-${{ needs.setup.outputs.tag_name }}.${{ matrix.os }}-${{ matrix.arch }}.tar.gz
-          asset_name: ${{ github.event.repository.name }}-.${{ matrix.os }}-${{ matrix.arch }}.tar.gz
-          asset_content_type: application/gzip
+          files: dist/${{ github.event.repository.name }}-${{ inputs.tag }}*
+          draft: true
+          prerelease: true
