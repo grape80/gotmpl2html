@@ -2,8 +2,6 @@ on:
   workflow_call:
     inputs:
       tag:
-        description: "Enter the tag name"
-        required: true
         type: string
   workflow_dispatch:
     inputs:
@@ -17,9 +15,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: docker compose up -d cicd && docker compose ps cicd
-      - run: docker compose exec cicd make gox VERSION=${{ inputs.tag }}
-
+      - run: |
+          docker compose up -d cicd && docker compose ps cicd
+          docker compose exec cicd make gox VERSION=${{ inputs.tag }}
       - uses: softprops/action-gh-release@v1
         with:
           files: dist/${{ github.event.repository.name }}-${{ inputs.tag }}*
