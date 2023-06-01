@@ -33,6 +33,7 @@ gotest:
 
 .PHONY: gox ## Build go binary for multi platform.
 gox:
+	test $(VERSION) != ''
 	mkdir -p $(distDir)
 	sh gox.sh
 
@@ -43,11 +44,11 @@ build: gobuild
 .PHONY: test ## Run test.
 test: gotest
 
-.PHONY: deploy ## Deploy binary.
-test: gox
+.PHONY: release ## Build release.
+release: gox
 
 .PHONY: cicd ## Run CI/CD.
-cicd: build test deploy
+cicd: build test release
 
 ##
 .PHONY: cleanbin ## Clean binary.
