@@ -7,6 +7,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: |
-          docker compose up -d cicd && docker compose ps cicd
-          docker compose exec cicd make gobuild
+      - run: docker compose up -d cicd && docker compose ps cicd
+      - run: docker compose exec cicd make gobuild
