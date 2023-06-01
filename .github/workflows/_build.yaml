@@ -1,12 +1,12 @@
 on:
   workflow_call:
-    paths:
-      - "**.go"
 
 jobs:
   gobuild:
     runs-on: ubuntu-latest
     steps:
+      - run: echo ${{ github.event.before }}
+      - run: echo ${{ github.event.after }}
       - uses: actions/checkout@v3
       - run: docker compose up -d cicd && docker compose ps cicd
       - run: docker compose exec cicd make gobuild
