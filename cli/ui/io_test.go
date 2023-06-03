@@ -8,7 +8,7 @@ import (
 	"github.com/grape80/gotmpl2html/cli/ui"
 )
 
-func TestUI_Print(t *testing.T) {
+func TestIO_Print(t *testing.T) {
 	stdout := new(bytes.Buffer)
 	io := &ui.IO{
 		os.Stdin,
@@ -26,7 +26,7 @@ func TestUI_Print(t *testing.T) {
 	}
 }
 
-func TestUI_Printf(t *testing.T) {
+func TestIO_Printf(t *testing.T) {
 	stdout := new(bytes.Buffer)
 	io := &ui.IO{
 		os.Stdin,
@@ -44,7 +44,7 @@ func TestUI_Printf(t *testing.T) {
 	}
 }
 
-func TestUI_Println(t *testing.T) {
+func TestIO_Println(t *testing.T) {
 	stdout := new(bytes.Buffer)
 	io := &ui.IO{
 		os.Stdin,
@@ -62,7 +62,7 @@ func TestUI_Println(t *testing.T) {
 	}
 }
 
-func TestUI_Eprint(t *testing.T) {
+func TestIO_Eprint(t *testing.T) {
 	stderr := new(bytes.Buffer)
 	io := &ui.IO{
 		os.Stdin,
@@ -80,7 +80,7 @@ func TestUI_Eprint(t *testing.T) {
 	}
 }
 
-func TestUI_Eprintf(t *testing.T) {
+func TestIO_Eprintf(t *testing.T) {
 	stderr := new(bytes.Buffer)
 	io := &ui.IO{
 		os.Stdin,
@@ -98,7 +98,7 @@ func TestUI_Eprintf(t *testing.T) {
 	}
 }
 
-func TestUI_Eprintln(t *testing.T) {
+func TestIO_Eprintln(t *testing.T) {
 	stderr := new(bytes.Buffer)
 	io := &ui.IO{
 		os.Stdin,
