@@ -1,13 +1,14 @@
 MAKEFLAGS += --no-builtin-rules
 .DEFAULT_GOAL := help
 
-include .build/.env
+include .build/env
 app := $(APP_NAME)
 mainDir := $(MAIN_DIR)
 binDir := $(BIN_DIR)
 logDir := $(LOG_DIR)
 logTestDir := $(LOG_TEST_DIR)
 distDir := $(DIST_DIR)
+tmpDir := $(TMP_DIR)
 
 gobuild_opts := $(shell cat .build/gobuild.opts | tr '\n' ' ')
 gofiles := $(shell find . -type f -name '*.go' -print)
@@ -46,8 +47,9 @@ gox: resc
 	sh gox.sh
 
 .PHONY: resc
-resc: cleansyso
-	$(windres) .build/windows/$(winVersionInfo).rc _$(winVersionInfo).syso
+resc:
+	mkdir -p $(tmpDir)
+	$(windres) .build/$(winVersionInfo).rc $(tmpDir)/$(winVersionInfo).syso
 
 ##
 .PHONY: build ## Build binary.
@@ -60,7 +62,7 @@ test: gotest gobench
 release: gox
 
 .PHONY: cicd ## Run CI/CD.
-cicd: build test release
+cicd: cleanall build test release
 
 ##
 .PHONY: cleanbin ## Clean binary.
@@ -75,9 +77,9 @@ cleanlog:
 cleandist:
 	rm -rfv $(distDir)
 
-.PHONY: cleansyso ## Clean syso.
-cleansyso:
-	rm -fv *.syso
+.PHONY: cleantmp ## Clean tmp.
+cleantmp:
+	rm -rfv $(tmpDir)
 
 .PHONY: cleanall ## Clean all.
-cleanall: cleanbin cleanlog cleandist cleansyso
+cleanall: cleanbin cleanlog cleandist cleantmp

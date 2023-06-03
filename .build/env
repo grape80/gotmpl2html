@@ -6,4 +6,5 @@ LOG_BUILD_DIR=${LOG_DIR}/build
 LOG_TEST_DIR=${LOG_DIR}/test
 LOG_RELEASE_DIR=${LOG_DIR}/release
 DIST_DIR=dist
-WIN_VERSION_INFO=versioninfo
+TMP_DIR=tmp
+WIN_VERSION_INFO=versioninfo_windows
