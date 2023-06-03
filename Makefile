@@ -34,6 +34,11 @@ gotest:
 	go test -v ./... -coverpkg=./... -count=1 -coverprofile=$(logTestDir)/gocover-$(now).out | tee $(logTestDir)/gotest-$(now).log
 	go tool cover -html=$(logTestDir)/gocover-$(now).out -o $(logTestDir)/gocover-$(now).html
 
+.PHONY: gobench ## Run go benchmark.
+gobench:
+	mkdir -p $(logTestDir)
+	go test -bench . -benchmem | tee $(logTestDir)/gobench-$(now).log
+
 .PHONY: gox ## Build go binary for multi platform.
 gox: resc
 	test $(VERSION) != ''
@@ -49,7 +54,7 @@ resc: cleansyso
 build: gobuild
 
 .PHONY: test ## Run test.
-test: gotest
+test: gotest gobench
 
 .PHONY: release ## Build release.
 release: gox

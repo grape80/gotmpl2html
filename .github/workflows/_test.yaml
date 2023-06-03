@@ -8,7 +8,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: docker compose up -d cicd && docker compose ps cicd
-      - run: docker compose exec cicd make gotest
+      - run: docker compose exec cicd make gotest gobench
       - uses: actions/upload-artifact@v3
         with:
           name: test_gotest_log

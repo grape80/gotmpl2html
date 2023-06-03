@@ -55,3 +55,16 @@ func TestApp_Run(t *testing.T) {
 		})
 	}
 }
+
+func BenchmarkApp_Run(b *testing.B) {
+	for i := 0; i < b.N; i++ {
+		app := New()
+		app.Stdin = new(bytes.Buffer)
+		app.Stdout = new(bytes.Buffer)
+		app.Stderr = new(bytes.Buffer)
+		app.Name = "gotmpl2html"
+		app.Args = []string{"testdata/data.gotmpl"}
+
+		app.Run()
+	}
+}
