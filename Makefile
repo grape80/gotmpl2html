@@ -13,6 +13,9 @@ gobuild_opts := $(shell cat .build/gobuild.opts | tr '\n' ' ')
 gofiles := $(shell find . -type f -name '*.go' -print)
 now = $(shell date '+%Y%m%d-%H%M%S')
 
+windres := /usr/bin/x86_64-w64-mingw32-windres
+winVersionInfo := $(WIN_VERSION_INFO)
+
 .PHONY: help ## Show help.
 help:
 	@cat $(MAKEFILE_LIST) | grep '##' | grep -v 'MAKEFILE_LIST' | sed s/^.PHONY:// | awk -F \#\# '{ printf "%-20s%s\n", $$1, $$2 }'
@@ -32,10 +35,14 @@ gotest:
 	go tool cover -html=$(logTestDir)/gocover-$(now).out -o $(logTestDir)/gocover-$(now).html
 
 .PHONY: gox ## Build go binary for multi platform.
-gox:
+gox: resc
 	test $(VERSION) != ''
 	mkdir -p $(distDir)
 	sh gox.sh
+
+.PHONY: resc
+resc: cleansyso
+	$(windres) .build/windows/$(winVersionInfo).rc _$(winVersionInfo).syso
 
 ##
 .PHONY: build ## Build binary.
@@ -53,15 +60,19 @@ cicd: build test release
 ##
 .PHONY: cleanbin ## Clean binary.
 cleanbin:
-	rm -rvf $(binDir)
+	rm -rfv $(binDir)
 
 .PHONY: cleanlog ## Clean log.
 cleanlog:
-	rm -rvf $(logDir)
+	rm -rfv $(logDir)
 
 .PHONY: cleandist ## Clean dist.
 cleandist:
-	rm -rvf $(distDir)
+	rm -rfv $(distDir)
+
+.PHONY: cleansyso ## Clean syso.
+cleansyso:
+	rm -fv *.syso
 
 .PHONY: cleanall ## Clean all.
-cleanall: cleanbin cleanlog cleandist
+cleanall: cleanbin cleanlog cleandist cleansyso
