@@ -56,7 +56,7 @@ func (a *App) run() error {
 }
 
 func (a *App) newCommand() (cli.Command, error) {
-	if err := a.parseArgs(a.Args); err != nil {
+	if err := a.parseArgs(); err != nil {
 		return nil, err
 	}
 
@@ -81,8 +81,8 @@ func (a *App) newCommand() (cli.Command, error) {
 	}
 }
 
-func (a *App) parseArgs(args []string) error {
-	if len(args) == 0 {
+func (a *App) parseArgs() error {
+	if len(a.Args) == 0 {
 		return errors.New(msgs.ERR_NO_ARGS)
 	}
 
