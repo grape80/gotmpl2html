@@ -1,2 +1,4 @@
+github.com/grape80/cli v0.0.0-20230604054331-4facd8fa13a8 h1:4g/1SW6Fh1GMOhdj+MuS0JIa2mbqBD3IjMIkalZUoY0=
+github.com/grape80/cli v0.0.0-20230604054331-4facd8fa13a8/go.mod h1:vKTXh3f/kdip+GLVhcqRhXoVhcB5NKZv7zG5GG7CRNA=
 golang.org/x/exp v0.0.0-20230522175609-2e198f4a06a1 h1:k/i9J1pBpvlfR+9QsetwPyERsqu1GIbi967PQMq3Ivc=
 golang.org/x/exp v0.0.0-20230522175609-2e198f4a06a1/go.mod h1:V1LtkGg67GoY2N1AnLN78QLrzxkLyJw7RJb1gzOOz9w=

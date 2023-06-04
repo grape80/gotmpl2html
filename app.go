@@ -5,8 +5,8 @@ import (
 	"os"
 	"strings"
 
-	"github.com/grape80/gotmpl2html/cli"
-	"github.com/grape80/gotmpl2html/cli/ui"
+	"github.com/grape80/cli"
+	"github.com/grape80/cli/ui"
 	"github.com/grape80/gotmpl2html/commands"
 	"github.com/grape80/gotmpl2html/msgs"
 )

@@ -6,7 +6,7 @@ import (
 	"io"
 	"strings"
 
-	"github.com/grape80/gotmpl2html/cli/ui"
+	"github.com/grape80/cli/ui"
 	"github.com/grape80/gotmpl2html/conv"
 	"github.com/grape80/gotmpl2html/msgs"
 )

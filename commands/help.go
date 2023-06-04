@@ -1,6 +1,6 @@
 package commands
 
-import "github.com/grape80/gotmpl2html/cli/ui"
+import "github.com/grape80/cli/ui"
 
 type Help struct {
 	*ui.IO
