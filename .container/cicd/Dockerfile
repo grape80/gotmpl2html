@@ -1,4 +1,4 @@
-FROM golang:1.20.3-bullseye
+FROM golang:1.20.6-bookworm
 
 RUN apt-get update \
  && apt-get install -y --no-install-recommends \
