@@ -62,24 +62,15 @@ test: gotest gobench
 release: gox
 
 .PHONY: cicd ## Run CI/CD.
-cicd: cleanall build test release
+cicd: clean build test release
 
 ##
-.PHONY: cleanbin ## Clean binary.
-cleanbin:
-	rm -rfv $(binDir)
+cleanDirs := $(binDir) $(logDir) $(distDir) $(tmpDir)
 
-.PHONY: cleanlog ## Clean log.
-cleanlog:
-	rm -rfv $(logDir)
+.PHONY: clean ## Clean all.
+clean: $(addprefix clean., $(cleanDirs))
 
-.PHONY: cleandist ## Clean dist.
-cleandist:
-	rm -rfv $(distDir)
-
-.PHONY: cleantmp ## Clean tmp.
-cleantmp:
-	rm -rfv $(tmpDir)
-
-.PHONY: cleanall ## Clean all.
-cleanall: cleanbin cleanlog cleandist cleantmp
+.PHONY: clean.% ## Clean the specified directory.
+clean.%:
+	test $(findstring $*, $(cleanDirs)) != ''
+	rm -rfv $*
